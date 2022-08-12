@@ -7,12 +7,6 @@ namespace HeroAPI.Controllers
     [ApiController]
     public class HerosController : ControllerBase
     {
-        private static List<Hero> heros = new List<Hero>
-        {
-            new Hero { Id = 1, Name = "IronMan", Place = "America" },
-            new Hero { Id = 2, Name = "Hulk", Place = "Americaf" }
-        };
-
         private readonly DataContext dataContext;
 
         public HerosController(DataContext dataContext)
@@ -42,6 +36,8 @@ namespace HeroAPI.Controllers
             await dataContext.SaveChangesAsync();
             return Ok(await dataContext.Heroes.ToListAsync());
         }
+
+        
 
         [HttpPut("{id}")]
         public async Task<ActionResult<Hero>> UpdateHero(Hero heroRequest)
